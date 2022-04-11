@@ -1,0 +1,49 @@
+<div style="display: flex;">
+<label style="margin: 20px;">Modelo:</label>
+<input style="width: 250px; margin: 10px;"
+[(ngModel)]="nomeModelo"
+name="nomeModelo"
+class="form-control"
+placeholder="ex: Strada" >
+<button style="margin: 10px;" (click)="loadTodos()" class="btn btn-primary">Buscar Modelo</button>
+
+
+<select style="width: 250px; margin: 10px auto auto auto" class="form-select" [(ngModel)]="idMarca" name="marca" (ngModelChange)="loadTodos()">
+  <option selected value="">Todos</option>
+  <option *ngFor = "let marca of marcas" [value]="marca.id"
+  >{{marca.nome}}</option>
+</select>
+<button style="margin: 10px;" (click)="voltar()" class="btn btn-primary">Listar todos</button>
+<button style="margin: 10px auto auto 50px;" routerLink="criarmodelo" class="btn btn-primary">Criar Modelo</button>
+</div>
+
+<div class="mat-elevation-z8 bg-primary">
+  <table class = "table table-dark table-striped" mat-table [dataSource]="dataSource">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef class="text-danger"> Nome </th>
+      <td mat-cell *matCellDef="let element" class="text-primary"> {{element.nomeModelo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="marca">
+      <th mat-header-cell *matHeaderCellDef class="text-danger"> Marca </th>
+      <td mat-cell *matCellDef="let element" class="text-primary"> {{element.marca.nome}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef class="text-danger"> Ações </th>
+      <td mat-cell *matCellDef="let element">
+        <button routerLink="update/{{ element.id }}" class="btn btn-primary">Atualizar</button>
+      <button (click)="deletarmodelo(element.id)" class="btn btn-danger" style="margin-left: 10px;">Deletar</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator class="bg-primary" [pageSizeOptions]="[5, 10, 20]" [pageSize]="10"></mat-paginator>
+</div>
+

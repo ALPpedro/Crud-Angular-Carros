@@ -1,0 +1,69 @@
+<div style="display: flex;">
+  <label style="margin: 20px;">Valor Menor</label>
+  <input style="width: 200px; margin: 10px;"
+  [(ngModel)]="valorMenor"
+  name="valorMenor"
+  class="form-control"
+  placeholder="ex: 100000" >
+
+  <label style="margin: 20px;">Valor Maior</label>
+  <input style="width: 200px; margin: 10px;"
+  [(ngModel)]="valorMaior"
+  name="valorMaior"
+  class="form-control"
+  placeholder="ex: 100000" >
+  <button style="margin: 10px;" (click)="loadTodos()" class="btn btn-primary">Buscar Modelo</button>
+
+  <button style="margin: 10px;" (click)="voltar()" class="btn btn-primary">Listar todos</button>
+  </div>
+
+  <div style="display: flex;">
+    <select style="width: 200px; margin: 10px auto auto auto" class="form-select" [(ngModel)]="idMarca" name="marca" (ngModelChange)="loadTodos()">
+      <option selected value="">Todos</option>
+      <option *ngFor = "let marca of marcas" [value]="marca.id"
+      >{{marca.nome}}</option>
+    </select>
+
+    <select style="width: 200px; margin: 10px auto auto auto" class="form-select" [(ngModel)]="idModelo" name="modelo" (ngModelChange)="loadTodos()">
+      <option selected value="">Todos</option>
+      <option *ngFor = "let modelo of modelos" [value]="modelo.id"
+      >{{modelo.nomeModelo}}</option>
+    </select>
+  <button style="margin: 10px auto auto 50px;" routerLink="criarveiculo" class="btn btn-primary">Criar Veiculo</button>
+  </div>
+  <div class="mat-elevation-z8 bg-primary">
+    <table class = "table table-light table-striped" mat-table [dataSource]="dataSource">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef class="text-danger"> Nome </th>
+        <td mat-cell *matCellDef="let element" class="text-primary"> {{element.modelo.nomeModelo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef class="text-danger"> Marca </th>
+        <td mat-cell *matCellDef="let element" class="text-primary"> {{element.modelo.marca.nome}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef class="text-danger"> Valor </th>
+        <td mat-cell *matCellDef="let element" class="text-primary"> {{element.valor}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef class="text-danger"> Ações </th>
+        <td mat-cell *matCellDef="let element">
+          <button routerLink="update/{{ element.id }}" class="btn btn-primary">Atualizar</button>
+        <button (click)="deletarveiculo(element.id)" class="btn btn-danger" style="margin-left: 10px;">Deletar</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator class="bg-primary" [pageSizeOptions]="[5, 10, 20]" [pageSize]="10"></mat-paginator>
+  </div>
+
+

@@ -1,0 +1,11 @@
+<form>
+  <div class="mb-3">
+    <label class="form-label">Marca:</label>
+    <input [(ngModel)]="marca.nome"
+    name="marca"
+    type="text"
+    class="form-control"
+    placeholder="Ex: BMW">
+  </div>
+  <button (click)="update()" class="btn btn-primary">Atulizar</button>
+</form>

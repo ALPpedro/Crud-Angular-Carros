@@ -1,0 +1,16 @@
+<form style="display: flex; align-items: center;">
+  <select style="margin: 10px; width: 250px;" class="form-select" [(ngModel)]="modelo.marca.id" name="marca">
+    <option *ngFor = "let marca of marcas" [value]="marca.id"
+    >{{marca.nome}}</option>
+  </select>
+
+  <div class="mb-3">
+    <label style="margin: 20px 10px 10px 10px;" for="exampleInputEmail1" class="form-label">Modelo:</label>
+    <input style="margin: 20px 10px 10px 10px; width: 250px;"
+    [(ngModel)]="modelo.nomeModelo"
+    name="nomeModelo"
+    placeholder="ex: BMW" >
+  </div>
+  <button style="margin: 10px; width: 100px;" type="submit" class="btn btn-primary" (click)="update()">Salvar</button>
+</form>
+

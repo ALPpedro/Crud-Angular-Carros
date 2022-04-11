@@ -1,0 +1,18 @@
+<form style="display: flex; align-items: center;">
+
+  <select style="margin: 10px; width: 250px;" class="form-select" [(ngModel)]="veiculo.modelo.id" name="modelo">
+    <option *ngFor = "let modelo of modelos" [value]="modelo.id"
+    >{{modelo.nomeModelo}}</option>
+  </select>
+
+  <div class="mb-3">
+    <label style="margin: 20px 10px 10px 10px;" for="exampleInputEmail1" class="form-label">Veiculo:</label>
+    <input style="margin: 20px 10px 10px 10px; width: 250px;"
+    [(ngModel)]="veiculo.valor"
+    name="valor"
+    placeholder="ex: 100000" >
+  </div>
+  <button style="margin: 10px; width: 100px;" type="submit" class="btn btn-primary" (click)="update()">Salvar</button>
+</form>
+
+
